@@ -18,10 +18,18 @@ accelerate launch
 --num_processes 1
 --main_process_port 29501
 qlora_training_accelerate.py
--i train.csv.jsonl
--d val.csv.jsonl
+-i train_dataset.jsonl
+-d validation_dataset.jsonl
 -m /path/to/llama3.1-8B
 -f output_dir_for_finetuned_model
 -p none
 ```
-
+Inference
+```
+CUDA_VISIBLE_DEVICES=0
+python hf_lora_inference.py
+-i test_dataset.jsonl
+-d output_dir_for_finetuned_model
+-m /path/to/llama3.1-8B
+--outputFile SFT_predictions.csv
+```
